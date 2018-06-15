@@ -1,4 +1,7 @@
-// Sylvain Lefebvre - 2018-06-11
+// SquareGrid infiller
+// 2018-06-11
+// by Sylvain Lefebvre
+//
 // This file is under MIT license
 //
 // Quick example of custom infiller for IceSL

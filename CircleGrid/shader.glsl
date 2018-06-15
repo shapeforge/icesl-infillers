@@ -1,3 +1,7 @@
+// CircleGrid infiller
+// 2018-06-14
+// by Jimmy Etienne and Salim Perchy
+
 int numPasses = 3; // tells the render the number of required passes
 uniform int u_Pass; // pass being rendered: 0,1,...,numPasses-1
 

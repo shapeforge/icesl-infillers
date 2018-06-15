@@ -1,3 +1,7 @@
+// TriangleGrid infiller
+// 2018-06-14
+// by Salim Perchy
+
 bool isEven( int n )
 {
     return (n-(n/2)*2) == 0;
