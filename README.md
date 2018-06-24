@@ -6,11 +6,13 @@ Infiller shaders answer the problem of designing custom infill patterns. This is
 
 A difficulty in designing your own infill is how to specify the paths themselves. Indeed, infill patterns are usually made of single deposition tracks, so specifying them as volume meshes or implicit volumes does not work well. In addition, the infill pattern may involve several crossing deposition tracks, and potentially varies according to e.g. a specified density field (to increase/decrease the fill percentage locally within the part).
 
-Our answer to this problem are infiller shaders. These are shaders (in GLSL) that can be used to create your own infill patterns in IceSL.
+Our answer to this problem are infiller shaders. These are shaders (in GLSL) that can be used to create your own infill patterns in IceSL. The idea is to describe the infill as colored cells, where a cell simply is a connected region having a same color. The color itself does not matter. What matters are the *boundaries* between the cells. These are extracted and become the infill pattern paths. The figure below illustrates this idea.
 
-The idea is to describe the infill as colored cells, where a cell simply is a connected region having a same color. The color itself does not matter. What matters are the /boundaries/ between the cells. These are extracted and become the infill pattern paths. The figure below illustrates this idea.
+<p align="center">
+<img src="Voro2D/voro2d_cells.png" height=256px/> <img src="Voro2D/voro2d_sliced.jpg" height=256px/>
+</p>
 
-
+*A 2D Voronoi infill. Left: colors computed by the shader. Right: Paths extracted during slicing. The paths are the frontiers between the colored cells.*
 
 This is a versatile approach that can be used to describe many infill patterns, from regular to irregular and foam-like structures. In addition, this can be used to create a variable infill and even deform an existing infill by changing the input coordinates (warping).
 
