@@ -14,7 +14,7 @@ Our answer to this problem are infiller shaders. These are shaders (in GLSL) tha
 
 *A 2D Voronoi infill. Left: colors computed by the shader. Right: Paths extracted during slicing. The paths are the frontiers between the colored cells. Try it on https://www.shadertoy.com/view/XdKBzc*
 
-This is a versatile approach that can be used to describe many infill patterns, from regular to irregular and foam-like structures. In addition, this can be used to create a variable infill and even deform an existing infill by changing the input coordinates (warping).
+This is a versatile approach that can be used to describe many infill patterns, from regular to irregular and foam-like structures. This has many advantages: the infill shaders are fully procedural, they can be used to create a variable infill, and could even be deformed by changing the input coordinates (warping).
 
 An infill can be produced in multiple passes, so as to obtain crossing continuous paths. Each pass is done independently, and paths are extracted before going to the next pass.
 
@@ -26,7 +26,7 @@ The shader has to implement the following function:
 vec4 cellular( vec3 world )
 ```
 
-This takes as input a 3d point (in millimeters) using world space coordinates (coordinates from the printing bed setup). The return value is a color (RGBA) for each cell. Again the color itself does not matter, what matters is that a frontier between two colors will produce a print path.
+This takes as input a 3d point (in millimeters) using world space coordinates (coordinates from the 3D scene). The return value is a color (RGBA) for each cell. Again the color itself does not matter, what matters is that a frontier between two colors will produce a print path. You do not have to worry about resolution, this is dealt with by IceSL. Simply keep in mind the coordinates are in millimeters.
 
 The shader can optionally specify a number of passes:
 ```glsl
