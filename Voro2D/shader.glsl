@@ -33,7 +33,7 @@ vec2 seed(float step,int i,int j)
 {
   vec2 center = vec2( float(i)*step + 0.5 , float(j)*step + 0.5 );
   vec2 n = hash(i,j);
-  return center + (n-0.5)*step;
+  return center + 0.707*(n-0.5)*step;
 }
 
 vec4 cellular( vec3 world )
