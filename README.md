@@ -26,7 +26,7 @@ The shader has to implement the following function:
 vec4 cellular( vec3 world )
 ```
 
-This takes as input a 3d point (in millimeters) using world space coordinates (coordinates from the 3D scene). The return value is a color (RGBA) for each cell. Again the color itself does not matter, what matters is that a frontier between two colors will produce a print path. You do not have to worry about resolution, this is dealt with by IceSL. Simply keep in mind the coordinates are in millimeters.
+This takes as input a 3d point in world space coordinates (coordinates from the 3D scene in millimeters). The return value is a color (RGBA). Again the color itself does not matter, what matters is that a boundaries between two colors will produce a print path. You do not have to worry about resolution, this is dealt with by IceSL. Simply keep in mind the coordinates are in millimeters.
 
 The shader can optionally specify a number of passes:
 ```glsl
@@ -38,11 +38,11 @@ The shader will receive the current pass being processed by declaring a uniform:
 uniform int u_Pass; // pass being rendered: 0,1,...,numPasses-1
 ```
 
-The density field (infill percentage) can be accessed as follows:
+The infill percentage parameter (infill _density_) can be accessed as follows:
 ```glsl
 float d = density(world);
 ```
-This returns the density at point 'world'. Keep in mind this will be either constant, varying per-layer or controlled by a field.
+This returns the infill percentage value at point 'world'. Keep in mind this parameter can be either constant, varying per-layer or controlled by a field.
 The returned value is in [0,100] (percentage). The shader can interpret it freely ; but of course users expect it to represent the percentage of infill volume within the part.
 
 Each infiller is a single file named "shader.glsl" stored in a subdirectory of icesl-infillers. These are automatically loaded into the UI. The icesl-infillers directory should be in %appdata%\IceSL (Windows) or ~/.icesl (Linux).
