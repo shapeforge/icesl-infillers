@@ -1,6 +1,15 @@
 // TriangleGrid infiller
 // 2018-06-14
 // by Salim Perchy
+//
+// This file is under MIT license
+//
+// Quick example of custom infiller for IceSL
+//
+// Produces a square grid
+// 
+// ShaderToy version: https://www.shadertoy.com/view/lsGBRt
+
 
 bool isEven( int n )
 {
@@ -38,13 +47,13 @@ const float cos_ang = a / tX;
 const mat4  mRotAng1 = mat4( // Z-rotation matrix by Ang
     cos_ang,-sin_ang,0,0,
     sin_ang, cos_ang,0,0,
-            0,         0,1,0,
-	        0,         0,0,1);
+          0,       0,1,0,
+	        0,       0,0,1);
 const mat4  mRotAng2 = mat4( // Z-rotation matrix by -Ang
     cos_ang, sin_ang,0,0,
    -sin_ang, cos_ang,0,0,
-            0,         0,1,0,
-	        0,         0,0,1);
+          0,       0,1,0,
+	        0,       0,0,1);
 			
 //////////////////////////////////////////
 const int numPasses = 3; // number of passes
@@ -52,32 +61,32 @@ uniform int u_Pass;      // current pass: 0,1,...,numPasses-1
 
 vec4 cellular( vec3 world )
 {
-    float d = density(world) / 100.0;					  // normalized density
-    if (u_Pass == 0) {       							  // first pass: create rows
-        float rowHeightDensity = tY / d;                  // row height wrt density
-    	int row = int(floor(world.y / rowHeightDensity));
+    float d = max(density(world),1.0) / 100.0;		     	  // normalized density
+    if (u_Pass == 0) {       							                // first pass: create rows
+        float rowSpacing = tY / d;                        // row height wrt density
+    	int row = int(floor(world.y / rowSpacing));
     	if (isEven(row)) {
-	        return vec4(1,0,0,1);						  // even rows are red
+	        return vec4(1,0,0,1);						                // even rows are red
     	} else {
-        	return vec4(0);       						  // odd rows are colorless
+        	return vec4(0);       						              // odd rows are colorless
     	}
-    } else if (u_Pass == 1) { 							  // second pass: create positive diagonals (i.e., /)
-        float diagonalDensity = 2.0 * a / d;			  // diagonal size wrt density
+    } else if (u_Pass == 1) { 							              // second pass: create positive diagonals (i.e., /)
+        float diagonalSpacing = 2.0 * a / d;	            // diagonal size wrt density
         vec4 worldTransformed = vec4(world,1) * mRotAng1; // point transformed to ease calculation of diagonal group
-        int diag = int(floor(worldTransformed.x / diagonalDensity));
+        int diag = int(floor(worldTransformed.x / diagonalSpacing));
         if (isEven(diag)) {
-            return vec4(0,1,0,1);						  // even positive diagonal groups are green
+            return vec4(0,1,0,1);						              // even positive diagonal groups are green
         } else {
-            return vec4(0);								  // odd positive diagonal groups are colorless
+            return vec4(0);								                // odd positive diagonal groups are colorless
         }
-    } else if (u_Pass == 2) {							  // third pass: create negative diagonals (i.e., \)
-        float diagonalDensity = 2.0 * a / d;			  // diagonal size wrt density
+    } else if (u_Pass == 2) {							                // third pass: create negative diagonals (i.e., \)
+        float diagonalSpacing = 2.0 * a / d;              // diagonal size wrt density
         vec4 worldTransformed = vec4(world,1) * mRotAng2; // point transformed to ease calculation of diagonal group
-        int diag = int(floor(worldTransformed.x / diagonalDensity));
+        int diag = int(floor(worldTransformed.x / diagonalSpacing));
         if (isEven(diag)) {
-            return vec4(0,0,1,1);						  // even negative diagonal groups are blue
+            return vec4(0,0,1,1);						              // even negative diagonal groups are blue
         } else {
-            return vec4(0);								  // odd negative diagonal groups are colorless
+            return vec4(0);								                // odd negative diagonal groups are colorless
         }
     }
 }
