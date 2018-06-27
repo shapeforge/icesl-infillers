@@ -1,20 +1,26 @@
-// Voro2D infiller
+// Honeycomb infiller
 // 2018-06-27
 // by Jimmy Etienne and Salim Perchy
 //
 // This file is under MIT license
 //
+// Quick example of custom infiller for IceSL
+//
 // Honeycomb infiller for IceSL
+//
+// ShaderToy version: https://www.shadertoy.com/view/MsVfzd
 
-#define S 4.0
-#define ratio sqrt(3.0)/3.0
-
-bool isEven(int n) {
+bool isEven(int n)
+{
   return (n - 2 * (n / 2)) == 0  ;
 }
 
-int numPasses = 1; // tells the render the number of required passes
-int u_Pass; // pass being rendered: 0,1,...,numPasses-1
+//////////////////////////////////////////
+#define S 4.0
+#define ratio sqrt(3.0)/3.0
+
+const int numPasses = 1; // tells the render the number of required passes
+uniform int u_Pass;      // pass being rendered: 0,1,...,numPasses-1
 
 vec4 cellular( vec3 world )
 {    
@@ -30,7 +36,7 @@ vec4 cellular( vec3 world )
   vec2 p1 = vec2 ( c * X, r * Y); // first closest point
   vec2 p2 = vec2 ( c2 * X + X / 2.0, r2 * Y + Y / 2.0); // second closest point
 
-  // Voronoi diagram (for colors)
+  // Voronoi diagram (4 colors)
   if ( length(world.xy - p1) < length(world.xy - p2) ) {
     if ( isEven(int(c)) ) {
       return vec4(1.0, 0.0, 0.0, 1.0);
@@ -45,3 +51,4 @@ vec4 cellular( vec3 world )
     }
   }
 }
+//////////////////////////////////////////

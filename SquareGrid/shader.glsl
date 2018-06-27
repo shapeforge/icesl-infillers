@@ -9,6 +9,7 @@
 // Produces a square grid
 // 
 // ShaderToy version: https://www.shadertoy.com/view/MdGBRt
+
 bool isEven(int n)
 {
     return n - (n/2)*2 == 0;
@@ -18,8 +19,8 @@ bool isEven(int n)
 const int numPasses = 2; // number of passes
 uniform int u_Pass;	     // current pass: 0,1,...,numPasses-1
 
-float colWidth  = 2.0;  // grid column width (mm)
-float rowHeight = 2.0;  // grod row height (mm)
+float colWidth  = 2.0;   // grid column width (mm)
+float rowHeight = 2.0;   // grod row height (mm)
 
 vec4 cellular( vec3 world )
 {
