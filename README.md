@@ -56,7 +56,7 @@ Each infiller is a single file named _shader.glsl_ stored in a subdirectory of i
 Not everyone is proficient writing GLSL shaders, therefore custom infills can also be specified with image files. The principle is the same as with infill shaders; cells are specified in the image as colored shapes. See the following infill image (included in IceSL) as an example:
 
 <p align="center">
-<img src="Jigsaw/cells.png" height=256px/> <img src="Voro2D/jigsaw_sliced.jpg" height=256px/>
+<img src="Jigsaw/cells.png" height=256px/> <img src="Jigsaw/jigsaw_sliced.jpg" height=256px/>
 </p>
 
 Specifically, a file named _cells.png_ stored in a subdirectory of icesl-infillers will register as a custom infill in IceSL. The PNG image must be 24 bits, this means there is no transparency information in the image file. It is heavily recommended that the image can be tiled (i.e., horizontal and vertical borders match each other). This ensures the custom infill is applied properly when the geometry is big enough to trigger a repetition of the image.
