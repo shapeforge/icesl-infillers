@@ -9,7 +9,8 @@
 // Gyroid infiller for IceSL
 
 vec4 gyroid (vec3 pos) {
-    pos *= density(pos)/50.0;
+    float coef = 1.0/(40.0 * nozzle_diameter());
+    pos *= density(pos)*coef;
     float v = dot(sin(pos),cos(pos.yzx));
     return v > 0. ? vec4(1,0,0,1) : vec4(0,0,1,1);
 }

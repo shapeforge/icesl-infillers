@@ -61,7 +61,8 @@ uniform int u_Pass;      // current pass: 0,1,...,numPasses-1
 
 vec4 cellular( vec3 world )
 {
-    float d = max(density(world),1.0) / 100.0;		     	  // normalized density
+    float coef = 1.0/(160.0 * nozzle_diameter());
+    float d = max(density(world),1.0) * coef;		     	  // normalized density
     if (u_Pass == 0) {       							                // first pass: create rows
         float rowSpacing = tY / d;                        // row height wrt density
     	int row = int(floor(world.y / rowSpacing));

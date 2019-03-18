@@ -19,7 +19,8 @@ uniform int u_Pass;         // current pass: 0,1,...,numPasses-1
 
 vec4 cellular (vec3 world)
 {
-  float d = max(density(world),1.0) / 100.0;
+  float coef = 1.0/(150.0 * nozzle_diameter());
+  float d = max(density(world),1.0) * coef;
 
   float radius   = initial_radius / d;
   float radius_2 = radius * (sqrt(2.0) - 1.0);

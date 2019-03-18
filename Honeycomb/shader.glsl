@@ -24,7 +24,8 @@ uniform int u_Pass;      // pass being rendered: 0,1,...,numPasses-1
 
 vec4 cellular( vec3 world )
 {    
-  float d = max(density(world),1.0) / 100.0;
+  float coef = 1.0/(90.0 * nozzle_diameter());
+  float d = density(world) * coef;
   float X = S * ratio / d; float Y = S / d;
   
   float r = round(world.y / Y); // row

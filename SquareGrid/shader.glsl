@@ -24,7 +24,8 @@ float rowHeight = 2.0;   // grod row height (mm)
 
 vec4 cellular( vec3 world )
 {
-    float d = max(density(world),1.0) / 100.0;             // normalized density (%)
+    float coef = 1.0/(100.0 * nozzle_diameter());
+    float d = max(density(world),1.0) * coef;             // normalized density (%)
     
     if (u_Pass == 0) {				                             // first pass: create the grid's columns
         float colSpacing = colWidth / d;                   // column width wrt density (mm)

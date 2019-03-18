@@ -38,7 +38,8 @@ vec2 seed(float step,int i,int j)
 
 vec4 cellular( vec3 world )
 {
-  float d    = density(world) / 100.0;
+  float coef = 1.0/(65.0 * nozzle_diameter());
+  float d    = density(world) * coef;
   // density is interpreted as a step size for the
   // Voronoi seed grid, in mm
   float step = 10.0 - d*8.0; // from 2 to 10 mm
