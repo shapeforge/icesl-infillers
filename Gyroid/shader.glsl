@@ -7,6 +7,8 @@
 // Quick example of custom infiller for IceSL
 //
 // Gyroid infiller for IceSL
+//
+// ShaderToy version: https://www.shadertoy.com/view/WstGWf
 
 vec4 gyroid (vec3 pos) {
     float coef = 1.0/(40.0 * nozzle_diameter());
