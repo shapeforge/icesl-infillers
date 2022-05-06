@@ -22,8 +22,15 @@ This is a versatile approach that can be used to describe many infill patterns, 
 
 An infill can be produced in multiple passes, so as to obtain crossing continuous paths. Each pass is done independently, and paths are extracted before going to the next pass.
 
-An infill shader has access to the infill percentage parameter (constant, per-layer or field). 
+An infill shader has access to some fields:
+- the infill percentage parameter (constant, per-layer or field).
+- the nozzle diameter.
+- the layer height.
 Access to other fields will be added in the future.
+
+Each infiller is a single file named _shader.glsl_ stored in a subdirectory of icesl-infillers. These are automatically loaded into the UI. The icesl-infillers directory should be in %appdata%\IceSL (Windows) or ~/.icesl (Linux).
+
+### Implementation
 
 The shader has to implement the following function:
 ```glsl
@@ -42,14 +49,24 @@ The shader will receive the current pass being processed by declaring a uniform:
 uniform int u_Pass; // pass being rendered: 0,1,...,numPasses-1
 ```
 
+### Accessing additional fields
+
+The layer height parameter (_layer_height_) can be accessed as follows:
+```glsl
+float l = layer_height();
+```
+
+The nozzle diameter parameter (_nozzle_diameter_) can be accessed as follows:
+```glsl
+float n = nozzle_diameter();
+```
+
 The infill percentage parameter (infill _density_) can be accessed as follows:
 ```glsl
 float d = density(world);
 ```
 This returns the infill percentage value at point 'world'. Keep in mind this parameter can be either constant, varying per-layer or controlled by a field.
 The returned value is in [0,100] (percentage). The shader can interpret it freely ; but of course users expect it to represent the percentage of infill volume within the part.
-
-Each infiller is a single file named _shader.glsl_ stored in a subdirectory of icesl-infillers. These are automatically loaded into the UI. The icesl-infillers directory should be in %appdata%\IceSL (Windows) or ~/.icesl (Linux).
 
 ## Infill images
 
