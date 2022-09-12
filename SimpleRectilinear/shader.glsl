@@ -1,4 +1,4 @@
-// Simple Rectiliear infiller
+// Simple Rectilinear infiller
 // 2022-04-05
 // by Pierre Bedell
 //
@@ -6,13 +6,13 @@
 //
 // Quick example of custom infiller for IceSL
 //
-// SimpleRectilinear innfiller for IceSL
+// SimpleRectilinear infiller for IceSL
 //
 // Produces a rectilinear infill pattern
 // which alternates at each z change
 // 
 // You can preview it in https://www.shadertoy.com/new
-// (copy-paste, and un-comment the shadertoy #define)
+// (copy-paste, and uncomment the shadertoy #define)
 
 //#define SHADERTOY
 
