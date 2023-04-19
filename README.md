@@ -78,6 +78,8 @@ Not everyone is proficient writing GLSL shaders, therefore custom infills can al
 
 Specifically, a file named _cells.png_ stored in a subdirectory of icesl-infillers will register as a custom infill in IceSL. The PNG image must be 24 bits, this means there is no transparency information in the image file. It is heavily recommended that the image can be tiled (i.e., horizontal and vertical borders match each other). This ensures the custom infill is applied properly when the geometry is big enough to trigger a repetition of the image.
 
+It is *strongly recommended* that the infill image is created with **no antialiasing**. Antialiasing softens the borders of the infill pattern by employing a color gradient that itself introduces many pixels with different colors. These colors make the pattern borders fussy and unintentionally throw off the algorithm in IceSL, resulting in really long calculation times. 
+
 Finally, how big the infill image is with respect to the geometry is defined by the printing parameter _Infiller image pixel size (mm)_ -- internal name **labeling_mm_per_pixel**. This specifies how big a pixel is in millimeters.
 
 Custom infillers are meant as a research tool, but we are hoping to see your infills being contributed! Feel free to ask for pull requests.
