@@ -74,7 +74,7 @@ The returned value is in [0,100] (percentage). The shader can interpret it freel
 Infiller shaders have the possibility to specify variables that can be then controlled through IceSL's UI, similar to printing parameters. These variables are specified as follows:
 
 ```glsl
-uniform {bool|int|float} ui_{parameter_name} = {parameter_value};
+uniform {bool|int|float} ui_{parameter_name} = {parameter_value} // {parameter_tooltip};
 ```
 
 Their declaration in shaders must be written in a single line and only boolean, integer and float types are allowed. A comment at the end of the line is also possible. Their UI component will show up in the _Brush_ section when their respective infiller is selected. Their usage inside the shader is the same as a normal _uniform_ variable.
